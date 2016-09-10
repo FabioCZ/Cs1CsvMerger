@@ -28,6 +28,7 @@ namespace GradeSheetMerger
             if (Environment.GetCommandLineArgs().Length > 1)
             {
                 var args = Environment.GetCommandLineArgs();
+                //Command line arguments - 1st is CS1400 file name, 2nd is CS1405 filename, 3rd is output filename
                 parseCs1400File(args[1]);
                 parseCs1405File(args[2]);
                 writeResult(args[3]);

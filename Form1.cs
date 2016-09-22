@@ -82,6 +82,8 @@ namespace GradeSheetMerger
             {
                 parseCs1405File(cs1405FileDialog.FileName);
 
+                resultSaveDialog.DefaultExt = "csv";
+                resultSaveDialog.Filter = "Comma Separated Value (*.csv)|*.csv";
                 if (resultSaveDialog.ShowDialog() == DialogResult.OK)
                 {
                     WriteResult(resultSaveDialog.FileName);

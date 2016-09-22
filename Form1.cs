@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JR.Utils.GUI.Forms;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -220,7 +221,16 @@ Input the assignment number, which you can find in the url when you view the ass
                 message += c.Name + ": " + Environment.NewLine + "- " + String.Join(Environment.NewLine + "- ", c.Comments.ToArray()) + Environment.NewLine;
                 message += "----------------------------------" + Environment.NewLine;
             }
-            MessageBox.Show(message);
+            var dialogRes = FlexibleMessageBox.Show(message, "Would you like to save these to a file?", MessageBoxButtons.YesNo);
+            if (dialogRes == DialogResult.Yes)
+            {
+                commentsSaveDialog.DefaultExt = "txt";
+                commentsSaveDialog.Filter = "Plain text file (*.txt)|*.txt";
+                if (commentsSaveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(commentsSaveDialog.FileName, message);
+                }
+            }
         }
 
         private void commentsButton_Click(object sender, EventArgs e)
